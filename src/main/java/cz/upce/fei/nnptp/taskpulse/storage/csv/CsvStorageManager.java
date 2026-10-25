@@ -1,10 +1,6 @@
 package cz.upce.fei.nnptp.taskpulse.storage.csv;
 
-import cz.upce.fei.nnptp.taskpulse.domain.Priority;
-import cz.upce.fei.nnptp.taskpulse.domain.Project;
-import cz.upce.fei.nnptp.taskpulse.domain.Task;
-import cz.upce.fei.nnptp.taskpulse.domain.TaskState;
-import cz.upce.fei.nnptp.taskpulse.domain.Worklog;
+import cz.upce.fei.nnptp.taskpulse.domain.*;
 import cz.upce.fei.nnptp.taskpulse.storage.InMemoryProjectRepository;
 import cz.upce.fei.nnptp.taskpulse.storage.InMemoryTaskRepository;
 import cz.upce.fei.nnptp.taskpulse.storage.ProjectRepository;
@@ -123,8 +119,16 @@ public class CsvStorageManager {
                             .toList();
                 }
 
-                Task task = new Task(id, projectId, title, description, priority, state,
-                        estimatedMinutes, dueDate, labels, null);
+                Task task = new TaskBuilder(projectId, title)
+                        .id(id)
+                        .description(description)
+                        .priority(priority)
+                        .state(state)
+                        .estimatedMinutes(estimatedMinutes)
+                        .dueDate(dueDate)
+                        .labels(labels)
+                        .build();
+
                 taskRepo.save(task);
                 taskMap.put(id, task);
             }
