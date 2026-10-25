@@ -16,11 +16,7 @@ public class TaskBuilder {
     private  Set<String> labels = new LinkedHashSet<>();
     private  List<Worklog> worklogs = new ArrayList<>();
 
-    /**
-     *
-     * @param projectId
-     * @param title
-     */
+
     public TaskBuilder(UUID projectId, String title){
         this.id = UUID.randomUUID();
         this.projectId = projectId;
@@ -67,9 +63,7 @@ public class TaskBuilder {
         return this;
     }
 
-    /**
-     *
-     */
+
     public Task build(){
         return new Task(
                 id,
