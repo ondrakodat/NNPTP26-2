@@ -8,6 +8,7 @@ public class TaskBuilder {
     private final UUID projectId;
     private final String title ;
     private String description = "";
+
     private Priority priority = Priority.MEDIUM;
     private TaskState state = TaskState.TODO;
     private Integer estimatedMinutes;
@@ -52,16 +53,12 @@ public class TaskBuilder {
     }
 
     public TaskBuilder labels(Collection<String> labels) {
-        this.labels = labels == null
-                ? new LinkedHashSet<>()
-                : new LinkedHashSet<>(labels);
+        this.labels = labels == null ? new LinkedHashSet<>() : new LinkedHashSet<>(labels);
         return this;
     }
 
     public TaskBuilder worklogs(Collection<Worklog> worklogs) {
-        this.worklogs = worklogs == null
-                ? new ArrayList<>()
-                : new ArrayList<>(worklogs);
+        this.worklogs = worklogs == null ? new ArrayList<>() : new ArrayList<>(worklogs);
         return this;
     }
 

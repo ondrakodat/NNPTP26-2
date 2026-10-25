@@ -1,9 +1,6 @@
 package cz.upce.fei.nnptp.taskpulse.service;
 
-import cz.upce.fei.nnptp.taskpulse.domain.Priority;
-import cz.upce.fei.nnptp.taskpulse.domain.Task;
-import cz.upce.fei.nnptp.taskpulse.domain.TaskState;
-import cz.upce.fei.nnptp.taskpulse.domain.Worklog;
+import cz.upce.fei.nnptp.taskpulse.domain.*;
 import cz.upce.fei.nnptp.taskpulse.domain.exception.ResourceNotFoundException;
 import cz.upce.fei.nnptp.taskpulse.storage.ProjectRepository;
 import cz.upce.fei.nnptp.taskpulse.storage.TaskRepository;
@@ -39,8 +36,12 @@ public class TaskService {
         if (!projectRepository.existsById(projectId)) {
             throw new ResourceNotFoundException("Project not found with id: " + projectId);
         }
-        Task task = new Task(UUID.randomUUID(), projectId, title, description, priority, TaskState.TODO,
-                estimatedMinutes, dueDate, null, null);
+        Task task = new TaskBuilder(projectId, title)
+                .description(description)
+                .priority(priority)
+                .estimatedMinutes(estimatedMinutes)
+                .dueDate(dueDate)
+                .build();
         return taskRepository.save(task);
     }
 
